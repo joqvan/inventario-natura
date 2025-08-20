@@ -1,26 +1,15 @@
 import os
-from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 
-# Cargar variables del archivo .env
-load_dotenv()
+db_url = os.getenv("DATABASE_URL")
+if not db_url:
+    raise RuntimeError("DATABASE_URL no está definida (configúrala en Railway)")
 
-# Leer credenciales desde .env
-DB_USER = os.getenv("DB_USER")
-DB_PASS = os.getenv("DB_PASS")
-DB_HOST = os.getenv("DB_HOST")
-DB_NAME = os.getenv("DB_NAME")
+# Railway suele dar 'postgres://', SQLAlchemy quiere 'postgresql://'
+if db_url.startswith("postgres://"):
+    db_url = db_url.replace("postgres://", "postgresql://", 1)
 
-# Conexión a la base de datos existente
-DATABASE_URL = f"mysql+mysqlconnector://{DB_USER}:{DB_PASS}@{DB_HOST}/{DB_NAME}"
-
-# Crear motor de SQLAlchemy
-engine = create_engine(DATABASE_URL)
-
-# Crear sesión
+engine = create_engine(db_url, pool_pre_ping=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
-# Base para los modelos
 Base = declarative_base()
-

@@ -1,4 +1,4 @@
-const apiUrl = 'http://localhost:5000/productos';
+const apiUrl = '"/productos"';
 
 // ========================
 // SUBMIT DEL FORMULARIO

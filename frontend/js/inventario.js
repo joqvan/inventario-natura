@@ -1,7 +1,7 @@
 // =========================
 // Config y estado
 // =========================
-const API = "http://localhost:5000/productos";
+const API = "/productos";
 let PRODUCTOS = [];
 
 // =========================
