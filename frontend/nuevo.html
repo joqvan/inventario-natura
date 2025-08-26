@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agregar producto</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header class="header">
+    <h1>📦 Inventario Natura</h1>
+    <nav>
+      <a href="index.html">Inventario</a>
+      <a href="nuevo.html" class="nav-active">➕ Agregar producto</a>
+      <button id="themeToggle" class="theme-toggle" type="button">🌙 Modo oscuro</button>
+    </nav>
+  </header>
+
+  <main class="content">
+    <section class="panel">
+      <h2>Agregar nuevo producto</h2>
+
+      <form id="agregarForm" autocomplete="off">
+        <!-- CÓDIGO DE BARRAS: texto para no perder ceros a la izquierda -->
+        <input
+          type="text"
+          id="codigoBarra"
+          name="codigoBarra"
+          class="form-control"
+          placeholder="Escanee o escriba el código de barras"
+          autocomplete="off"
+          autocapitalize="off"
+          autocorrect="off"
+          spellcheck="false"
+          autofocus
+        />
+
+        <input type="text" id="nombre" name="nombre" placeholder="Nombre del producto" required />
+        <input type="text" id="descripcion" name="descripcion" placeholder="Descripción" />
+        <input type="number" id="stock" name="stock" placeholder="Stock inicial" min="0" />
+
+        <div class="form-buttons">
+          <button type="submit">✅ Agregar</button>
+        </div>
+      </form>
+
+      <p id="agregarResultado" class="mensaje"></p>
+    </section>
+  </main>
+
+  <!-- Modal para modificar stock -->
+  <div id="modalStock" class="modal oculto">
+    <div class="modal-contenido">
+      <h2>Modificar Stock</h2>
+      <p>Producto: <span id="modalCodigo"></span></p>
+      <input type="hidden" id="modalAccion" />
+      <input type="number" id="modalCantidad" placeholder="Cantidad" min="1" />
+      <button onclick="confirmarModificarStock()">Confirmar</button>
+      <button onclick="cerrarModalStock()">Cancelar</button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/scanner.js"></script>
+  <script src="js/agregar.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
